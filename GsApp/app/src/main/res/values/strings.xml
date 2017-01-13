@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GsApp</string>
+    <string name="more">more</string>
+    <string name="info">info</string>
+    <string name="main">main</string>
+    <string name="sample_1">aaaa</string>
+    <string name="sample_2">bbbb</string>
 </resources>
