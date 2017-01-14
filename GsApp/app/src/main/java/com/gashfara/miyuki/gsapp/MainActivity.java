@@ -48,8 +48,8 @@ public class MainActivity extends ActionBarActivity {
     private void fetch() {
         //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
         JsonObjectRequest request = new JsonObjectRequest(
-//                "https://drive.google.com/file/d/0B9CRQMFdiJG4NWtmTWhFOWtwWUU/view?usp=sharing" ,//jsonデータが有るサーバーのURLを指定します。
-                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
+                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
+//                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
                 new Response.Listener<JSONObject>() {
@@ -85,14 +85,17 @@ public class MainActivity extends ActionBarActivity {
         //空のMessageRecordデータの配列を作成
         ArrayList<MessageRecord> records = new ArrayList<MessageRecord>();
         //jsonデータのmessagesにあるJson配列を取得します。
-        JSONArray jsonMessages = json.getJSONArray("forecasts");
+//        JSONArray jsonMessages = json.getJSONArray("forecasts");
+        JSONArray jsonMessages = json.getJSONArray("messages");
         //配列の数だけ繰り返します。
         for(int i =0; i < jsonMessages.length(); i++) {
             //１つだけ取り出します。
             JSONObject jsonMessage = jsonMessages.getJSONObject(i);
             //jsonの値を取得します。
-            String title = jsonMessage.getString("telop");
-            String url = jsonMessage.getJSONObject("image").getString("url");
+//            String title = jsonMessage.getString("telop");
+//            String url = jsonMessage.getJSONObject("image").getString("url");
+            String title = jsonMessage.getString("comment2");
+            String url = jsonMessage.getString("imageUrl");
             //jsonMessageを新しく作ります。
             MessageRecord record = new MessageRecord(url, title);
             //MessageRecordの配列に追加します。
