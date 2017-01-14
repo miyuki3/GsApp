@@ -12,24 +12,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_824e56078e3f3ec00cde3b901eaa560033bf5eb6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-10.0.1_2424f437185d726265c100ba8ca0750ce0a3e0cc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -39,12 +21,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_777bb049f1eefe1c87d77019112480e6ea66e7aa/classes.dex" />
+        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-10.0.1_2424f437185d726265c100ba8ca0750ce0a3e0cc/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -66,24 +48,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/10.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-10.0.1_974c49d66cd8fdc13577746d483d12ca64e117bd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/10.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gass-10.0.1_cd025f9516909bb553fd556e276bd4a3184061ea/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -99,15 +63,6 @@
         revision="25.0.2"
         sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_80b297dbfe901f9eb8968264442c1885bebfc492/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_44efaa5e7c35de97a5da3f3c02a53bf4a803d701/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -133,17 +88,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="a53a60c15c9ec77a6dabcde1366af868e80c4c86">
+        sha1="3997547cab6e41c7d84859eb38203adca7c67916">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_83059e6951058bc42f684af16d8c9463c3e477b0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_481c74043a10eb182c470e0ff4fff1b21bf223c6/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -156,12 +102,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_b063b45d10a3757c43e20601380da8069e6bc388/classes.dex" />
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_5b7fee7528e417b983a1fceffa833a181d91b58f/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -171,15 +117,6 @@
         revision="25.0.2"
         sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.0_93bf056a7513b146d6c52e2eb121eb4f845070ac/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_5b7fee7528e417b983a1fceffa833a181d91b58f/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -198,6 +135,69 @@
         revision="25.0.2"
         sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_963628f90f858d9329e25fb5d19d9d5fb1e98267/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_824e56078e3f3ec00cde3b901eaa560033bf5eb6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_777bb049f1eefe1c87d77019112480e6ea66e7aa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/10.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-10.0.1_974c49d66cd8fdc13577746d483d12ca64e117bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/10.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gass-10.0.1_cd025f9516909bb553fd556e276bd4a3184061ea/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_44efaa5e7c35de97a5da3f3c02a53bf4a803d701/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_481c74043a10eb182c470e0ff4fff1b21bf223c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_b063b45d10a3757c43e20601380da8069e6bc388/classes.dex" />
     </item>
     <item
         is-multidex="true"
