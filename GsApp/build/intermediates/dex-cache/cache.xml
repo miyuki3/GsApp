@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="5bf22274e863e2ddb805749d2b761dbeebe3e3e5">
+        sha1="708032a6a5189b4d7949341f020be49a3c1073b5">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9ae3cc3a17b57c2bcd8f6ee288631e070efa5938/classes.dex" />
     </item>
     <item
@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6077f4e11a56b65b12bd0639447e6a904be1f55e">
+        sha1="f8f57a1dd08ca561458e820a98f3461961c81e12">
         <dex dex="/Users/miyuki/Desktop/Gs_lesson/GsApp/GsApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_83059e6951058bc42f684af16d8c9463c3e477b0/classes.dex" />
     </item>
     <item

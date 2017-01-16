@@ -48,9 +48,10 @@ public class MainActivity extends ActionBarActivity {
     private void fetch() {
         //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
         JsonObjectRequest request = new JsonObjectRequest(
-                "https://connpass.com/api/v1/event/?q=Unity" ,
+//                "https://connpass.com/api/v1/event/?q=Unity" ,
 //                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
 //                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
+                "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522?format=json&keyword=%E7%94%B7%E3%81%AE%E5%A8%98&applicationId=1033442970304401120" ,
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
                 new Response.Listener<JSONObject>() {
@@ -88,7 +89,9 @@ public class MainActivity extends ActionBarActivity {
         //jsonデータのmessagesにあるJson配列を取得します。
 //        JSONArray jsonMessages = json.getJSONArray("forecasts");
 //        JSONArray jsonMessages = json.getJSONArray("messages");
-        JSONArray jsonMessages = json.getJSONArray("events");
+//        JSONArray jsonMessages = json.getJSONArray("events");
+        JSONArray jsonMessages = json.getJSONArray("Items");
+
         //配列の数だけ繰り返します。
         for(int i =0; i < jsonMessages.length(); i++) {
             //１つだけ取り出します。
@@ -96,8 +99,10 @@ public class MainActivity extends ActionBarActivity {
             //jsonの値を取得します。
 //            String title = jsonMessage.getString("telop");
 //            String url = jsonMessage.getJSONObject("image").getString("url");
-            String title = jsonMessage.getString("title");
-            String url = jsonMessage.getString("catch");
+//            String title = jsonMessage.getString("title");
+//            String url = jsonMessage.getString("catch");
+            String title = jsonMessage.getJSONObject("Item").getString("title");
+            String url = jsonMessage.getJSONObject("Item").getString("mediumImageUrl");
             //jsonMessageを新しく作ります。
             MessageRecord record = new MessageRecord(url, title);
             //MessageRecordの配列に追加します。
