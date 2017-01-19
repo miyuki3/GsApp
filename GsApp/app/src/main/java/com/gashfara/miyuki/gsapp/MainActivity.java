@@ -96,15 +96,16 @@ public class MainActivity extends ActionBarActivity {
         //配列の数だけ繰り返します。
         for(int i = 0; i < jsonMessages.length(); i++) {
             //１つだけ取り出します。
-            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
+//            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
+            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
             //jsonの値を取得します。
 //            String title = jsonMessage.getString("telop");
 //            String url = jsonMessage.getJSONObject("image").getString("url");
 //            String title = jsonMessage.getString("comment2");
 //            String url = jsonMessage.getString("imageUrl");
-            String url = jsonMessage.getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
-            String title = jsonMessage.getJSONObject("hotelBasicInfo").getString("hotelName");
-            String price = jsonMessage.getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
+            String url = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
+            String title = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelName");
+            String price = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
             //jsonMessageを新しく作ります。
             MessageRecord record = new MessageRecord(url, title, price);
             //MessageRecordの配列に追加します。
