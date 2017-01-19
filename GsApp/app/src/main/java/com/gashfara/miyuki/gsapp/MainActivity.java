@@ -48,8 +48,10 @@ public class MainActivity extends ActionBarActivity {
     private void fetch() {
         //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
         JsonObjectRequest request = new JsonObjectRequest(
-                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
+//                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
 //                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
+                "https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20120927?format=json&genreId=564517&formatVersion=2&applicationId=1033442970304401120",
+
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
                 new Response.Listener<JSONObject>() {
@@ -86,7 +88,9 @@ public class MainActivity extends ActionBarActivity {
         ArrayList<MessageRecord> records = new ArrayList<MessageRecord>();
         //jsonデータのmessagesにあるJson配列を取得します。
 //        JSONArray jsonMessages = json.getJSONArray("forecasts");
-        JSONArray jsonMessages = json.getJSONArray("messages");
+//        JSONArray jsonMessages = json.getJSONArray("messages");
+        JSONArray jsonMessages = json.getJSONArray("Items");
+
         //配列の数だけ繰り返します。
         for(int i =0; i < jsonMessages.length(); i++) {
             //１つだけ取り出します。
@@ -94,10 +98,15 @@ public class MainActivity extends ActionBarActivity {
             //jsonの値を取得します。
 //            String title = jsonMessage.getString("telop");
 //            String url = jsonMessage.getJSONObject("image").getString("url");
-            String title = jsonMessage.getString("comment2");
-            String url = jsonMessage.getString("imageUrl");
+//            String title = jsonMessage.getString("comment2");
+//            String url = jsonMessage.getString("imageUrl");
+            String url = jsonMessage.getString("shopUrl");
+            String title = jsonMessage.getString("itemName");
+            String price = jsonMessage.getString("itemPrice");
+
+
             //jsonMessageを新しく作ります。
-            MessageRecord record = new MessageRecord(url, title);
+            MessageRecord record = new MessageRecord(url, title, price);
             //MessageRecordの配列に追加します。
             records.add(record);
         }

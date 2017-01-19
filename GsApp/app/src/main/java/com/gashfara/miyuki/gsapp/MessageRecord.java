@@ -6,11 +6,13 @@ public class MessageRecord {
     //newて呼び出さないと、classは作られない。
     private String imageUrl;
     private String comment;
+    private String price;
 
     //データを１つ作成する関数です。項目が増えたら増やしましょう。MessageRecordはコンストラクターという.
-    public MessageRecord(String imageUrl, String comment) {
+    public MessageRecord(String imageUrl, String comment, String price) {
         this.imageUrl = imageUrl;
         this.comment = comment;
+        this.price = price;
     }
     //それぞれの項目を返す関数です。項目が増えたら増やしましょう。getするためのfuncion。
     public String getComment() {
@@ -19,4 +21,5 @@ public class MessageRecord {
     public String getImageUrl() {
         return imageUrl;
     }
+    public String getPrice(){ return price; }
 }
