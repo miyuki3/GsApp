@@ -51,7 +51,8 @@ public class MainActivity extends ActionBarActivity {
 //                "https://connpass.com/api/v1/event/?q=Unity" ,
 //                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
 //                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
-                "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522?format=json&keyword=%E7%94%B7%E3%81%AE%E5%A8%98&applicationId=1033442970304401120" ,
+//                "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522?format=json&keyword=%E7%94%B7%E3%81%AE%E5%A8%98&applicationId=1033442970304401120" ,
+                "https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20120927?format=json&genreId=564517&formatVersion=2&applicationId=103344297030440112",
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
                 new Response.Listener<JSONObject>() {
@@ -101,10 +102,11 @@ public class MainActivity extends ActionBarActivity {
 //            String url = jsonMessage.getJSONObject("image").getString("url");
 //            String title = jsonMessage.getString("title");
 //            String url = jsonMessage.getString("catch");
-            String title = jsonMessage.getJSONObject("Item").getString("title");
-            String url = jsonMessage.getJSONObject("Item").getString("mediumImageUrl");
+            String title = jsonMessage.getString("itemName");
+            String url = jsonMessage.getString("mediumImageUrl[0]");
+            String rnk = jsonMessage.getString("rank");
             //jsonMessageを新しく作ります。
-            MessageRecord record = new MessageRecord(url, title);
+            MessageRecord record = new MessageRecord(url, title, rnk);
             //MessageRecordの配列に追加します。
             records.add(record);
         }
