@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         JsonObjectRequest request = new JsonObjectRequest(
 //                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
 //                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
-                "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20131024?format=json&formatVersion=2&sort=standard&searchRadius=1&latitude=35.69384&longitude=139.703549&datumType=1&elements=hotelName%2ChotelMinCharge%2CnearestStation%2CroomThumbnailUrl&applicationId=1033442970304401120",
+                "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20131024?format=json&formatVersion=1&sort=standard&latitude=35.691638&longitude=139.704616&searchRadius=1&datumType=1&applicationId=1033442970304401120",
 
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
@@ -96,16 +96,18 @@ public class MainActivity extends ActionBarActivity {
         //配列の数だけ繰り返します。
         for(int i = 0; i < jsonMessages.length(); i++) {
             //１つだけ取り出します。
-//            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
-            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
+            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
+//            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
             //jsonの値を取得します。
 //            String title = jsonMessage.getString("telop");
 //            String url = jsonMessage.getJSONObject("image").getString("url");
 //            String title = jsonMessage.getString("comment2");
 //            String url = jsonMessage.getString("imageUrl");
-            String url = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
-            String title = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelName");
-            String price = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
+            String url = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
+            String title = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("userReview");
+            String price = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
+// String title = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelInformationUrl");
+//            String price = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
             //jsonMessageを新しく作ります。
             MessageRecord record = new MessageRecord(url, title, price);
             //MessageRecordの配列に追加します。
