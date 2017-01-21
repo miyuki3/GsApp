@@ -45,7 +45,6 @@ public class WebActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // ボタンがクリックされた時に呼び出されます
                 finish();
-
             }
         });
 
