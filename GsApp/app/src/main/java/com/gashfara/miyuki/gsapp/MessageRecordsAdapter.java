@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,7 +21,11 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //<MessageRecord>はデータクラスMessageRecordのArrayAdapterであることを示している。このアダプターで管理したいデータクラスを記述されば良い。
 // MessageRecordsAdapterは自分で作った名前。extends ArrayAdapterとはArrayAdapterの機能をコピーしてMessageRecordsAdapterとして作りますよという意味。
@@ -46,6 +54,59 @@ public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
         TextView textView = (TextView) convertView.findViewById(R.id.text1);
         TextView textView1 =(TextView) convertView.findViewById(R.id.text2);
 
+//        //--------  SpannableStringでwebリンクを制御するプログラムはここから（まだできてない）
+//
+//    private void setSpannableString(View view) {
+//
+//        String message = textView;
+//
+//        // リンク化対象の文字列、リンク先 URL を指定する
+//        Map<String, String> map = new HashMap<String, String>();
+//        map.put("利用規約", "http://hogehoge.com/rules");
+//        map.put("プライバシーポリシー", "http://hogehoge.com/policies");
+//
+//        // SpannableString の取得
+//        SpannableString ss = createSpannableString(message, map);
+//
+//        // SpannableString をセットし、リンクを有効化する
+//        TextView textView = (TextView) view.findViewById(R.id.text);
+//        textView.setText(ss);
+//        textView.setMovementMethod(LinkMovementMethod.getInstance());
+//    }
+//    private SpannableString createSpannableString(String textView, Map<String, String> map) {
+//
+//            SpannableString ss = new SpannableString(textView);
+//
+//            for (final Map.Entry<String, String> entry : map.entrySet()) {
+//                int start = 0;
+//                int end = 0;
+//
+//                // リンク化対象の文字列の start, end を算出する
+//                Pattern pattern = Pattern.compile(entry.getKey());
+//                Matcher matcher = pattern.matcher(textView);
+//                while (matcher.find()) {
+//                    start = matcher.start();
+//                    end = matcher.end();
+//                    break;
+//                }
+//
+//                //********SpannableString にクリックイベント、パラメータをセットする
+//                ss.setSpan(new ClickableSpan() {
+//                    @Override
+//                    public void onClick(View textView) {
+//                        String url = entry.getValue();
+//                        Uri uri = Uri.parse(url);
+//                        Intent intent = new Intent(view.getContext(), WebActivity.class);
+////                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        view.getContext().startActivity(intent);
+//                    }
+//                }, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+//            }
+//
+//            return ss;
+//        }
+//        //--------  SpannableStringでwebリンクを制御するプログラムはここまで
+//
         //webリンクを制御するプログラムはここから
         // ******TextView に LinkMovementMethod を登録します
         //******TextViewをタップした時のイベントリスナー（タップの状況を監視するクラス）を登録します。onTouchにタップした時の処理を記述します。buttonやほかのViewも同じように記述できます。
