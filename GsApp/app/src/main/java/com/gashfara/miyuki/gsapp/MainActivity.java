@@ -2,6 +2,9 @@
 //どのアクティビティーが起動時に実行されるのかはAndroidManifestに記述されています。
 package com.gashfara.miyuki.gsapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kii.cloud.storage.KiiUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +34,23 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+       //Userで追加ここから
+        //KiiCloudでのログイン状態を取得します。nullの時はログインしていない。
+        KiiUser user = KiiUser.getCurrentUser();
+        //自動ログインのため保存されているaccess tokenを読み出す。tokenがあればログインできる
+        SharedPreferences pref = getSharedPreferences(getString(R.string.save_data_name), Context.MODE_PRIVATE);
+        String token = pref.getString(getString(R.string.save_token), "");//保存されていない時は""
+        //ログインしていない時はログインのactivityに遷移.SharedPreferencesが空の時もチェックしないとLogOutできない。
+        if(user == null || token == "") {
+            // Intent のインスタンスを取得する。getApplicationContext()でViewの自分のアクティビティーのコンテキストを取得。遷移先のアクティビティーを.classで指定
+            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+            // 遷移先の画面を呼び出す
+            startActivity(intent);
+            //戻れないようにActivityを終了します。
+            finish();
+        }
+        //Userで追加ここまで
         //メイン画面のレイアウトをセットしています。ListView
         setContentView(R.layout.activity_main);
 
@@ -51,8 +72,8 @@ public class MainActivity extends ActionBarActivity {
 //                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
 //                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
 //                "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20131024?format=json&formatVersion=1&sort=standard&latitude=35.691638&longitude=139.704616&searchRadius=1&datumType=1&applicationId=1033442970304401120",
-//                "https://itunes.apple.com/search?term=Grimes",
-                "https://itunes.apple.com/search?term=musicVideo",
+                "https://itunes.apple.com/search?term=Grimes",
+//                "https://itunes.apple.com/search?term=musicVideo",
 
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
@@ -101,9 +122,9 @@ public class MainActivity extends ActionBarActivity {
             JSONObject jsonMessage = jsonMessages.getJSONObject(i);
 //            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
             //jsonの値を取得します。
-            String title = jsonMessage.getString("artistName");
+            String title = jsonMessage.getString("trackViewUrl");
             String url = jsonMessage.getString("artworkUrl100");
-            String price = jsonMessage.getString("collectionName");
+            String price = jsonMessage.getString("collectionPrice");
 
 //            String title = jsonMessage.getString("comment2");
 //            String url = jsonMessage.getString("imageUrl");
@@ -122,26 +143,43 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //デフォルトで作成されたメニューの関数です。未使用。
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        //Userで追加ここから
+        //ログアウト処理.KiiCloudにはログアウト機能はないのでAccesTokenを削除して対応。
+        if (id == R.id.log_out) {
+            //自動ログインのため保存されているaccess tokenを消す。
+            SharedPreferences pref = getSharedPreferences(getString(R.string.save_data_name), Context.MODE_PRIVATE);
+            //apply();して初めてプログラムに書かれる。
+            pref.edit().clear().apply();
+            //ログイン画面に遷移
+            // Intent のインスタンスを取得する。getApplicationContext()でViewの自分のアクティビティーのコンテキストを取得。遷移先のアクティビティーを.classで指定
+            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+            // 遷移先の画面を呼び出す
+            startActivity(intent);
+            //戻れないようにActivityを終了します。
+            finish();
+            return true;
+        }
+        //Userで追加ここまで
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
