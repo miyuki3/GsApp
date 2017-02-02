@@ -15,6 +15,9 @@
     <string name="save_data_name">DataSave</string>
     <string name="save_token">save_token</string>
     <string name="action_settings">Settings</string>
+    <string name="first_sign_up">新規登録はこちら</string>
+    <string name="resister">新規登録はコチラ</string>
+    <string name="register">新規登録はコチラ</string>
 
     <!-- Userで追加ここまで-->
 

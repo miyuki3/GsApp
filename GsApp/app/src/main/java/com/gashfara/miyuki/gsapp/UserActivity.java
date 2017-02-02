@@ -80,6 +80,17 @@ public class UserActivity extends ActionBarActivity {
             }
         });
     }
+
+    public void onSignupButtonClicked(View v) {
+        // Intent のインスタンスを取得する。getApplicationContext()でViewの自分のアクティビティーのコンテキストを取得。遷移先のアクティビティーを.classで指定
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        // 遷移先の画面を呼び出す
+        startActivity(intent);
+        //戻れないようにActivityを終了します。
+        finish();
+    }
+
+
     //ログイン処理：参考　http://documentation.kii.com/ja/guides/android/managing-users/sign-in/
     public void onLoginButtonClicked(View v) {
         //IMEを閉じる
@@ -102,22 +113,22 @@ public class UserActivity extends ActionBarActivity {
         newFragment.show(getFragmentManager(), "dialog");
     }
     //登録処理
-    public void onSignupButtonClicked(View v) {
-        //IMEを閉じる
-        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-        //入力文字を得る
-        String username = mUsernameField.getText().toString();
-        String password = mPasswordField.getText().toString();
-        try {
-            //KiiCloudのユーザ登録処理
-            KiiUser user = KiiUser.createWithUsername(username);
-            user.register(callback, password);
-        } catch (Exception e) {
-            showAlert(R.string.operation_failed, e.getLocalizedMessage(), null);
-        }
-    }
+//    public void onSignupButtonClicked(View v) {
+//        //IMEを閉じる
+//        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//
+//        //入力文字を得る
+//        String username = mUsernameField.getText().toString();
+//        String password = mPasswordField.getText().toString();
+//        try {
+//            //KiiCloudのユーザ登録処理
+//            KiiUser user = KiiUser.createWithUsername(username);
+//            user.register(callback, password);
+//        } catch (Exception e) {
+//            showAlert(R.string.operation_failed, e.getLocalizedMessage(), null);
+//        }
+//    }
     //新規登録、ログインの時に呼び出されるコールバック関数callbackはclassの変数。functionじゃない。
     KiiUserCallBack callback = new KiiUserCallBack() {
         //ログインが完了した時に自動的に呼び出される。自動ログインの時も呼び出される
