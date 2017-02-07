@@ -59,10 +59,12 @@ public class UserActivity extends ActionBarActivity {
         mPasswordField.setTransformationMethod(new PasswordTransformationMethod());
         //パスワードの入力文字を制限する。参考：http://techbooster.jpn.org/andriod/ui/3857/
         mPasswordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        //登録ボタン
-        Button signupBtn = (Button) findViewById(R.id.signup_button);
         //ログインボタン
         Button loginBtn = (Button) findViewById(R.id.login_button);
+        //登録ボタン
+        Button signupBtn = (Button) findViewById(R.id.signup_button);
+        //FBログインボタン
+        Button FbLoginBtn = (Button) findViewById(R.id.FbUserButton);
         //ログインボタンをクリックした時の処理を設定
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +81,24 @@ public class UserActivity extends ActionBarActivity {
                 onSignupButtonClicked(v);
             }
         });
+        //FBボタンをクリックした時の処理を設定
+        FbLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //FBログイン処理
+                onFbUserBtnClicked(v);
+            }
+        });
+    }
+
+
+    public void onFbUserBtnClicked(View v) {
+        // Intent のインスタンスを取得する。getApplicationContext()でViewの自分のアクティビティーのコンテキストを取得。遷移先のアクティビティーを.classで指定
+        Intent intent = new Intent(getApplicationContext(), FbUserActivity.class);
+        // 遷移先の画面を呼び出す
+        startActivity(intent);
+        //戻れないようにActivityを終了します。
+        finish();
     }
 
     public void onSignupButtonClicked(View v) {
