@@ -15,7 +15,12 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kii.cloud.storage.Kii;
+import com.kii.cloud.storage.KiiObject;
 import com.kii.cloud.storage.KiiUser;
+import com.kii.cloud.storage.callback.KiiQueryCallBack;
+import com.kii.cloud.storage.query.KiiQuery;
+import com.kii.cloud.storage.query.KiiQueryResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,82 +70,133 @@ public class MainActivity extends ActionBarActivity {
         fetch();
 
     }
+
+    //ListView2で追加ここから
+    //KiiCLoud対応のfetchです。
     //自分で作った関数です。一覧のデータを作成して表示します。
     private void fetch() {
-        //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
-        JsonObjectRequest request = new JsonObjectRequest(
-//                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
-//                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
-//                "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20131024?format=json&formatVersion=1&sort=standard&latitude=35.691638&longitude=139.704616&searchRadius=1&datumType=1&applicationId=1033442970304401120",
-                "https://itunes.apple.com/search?term=Grimes",
-//                "https://itunes.apple.com/search?term=musicVideo",
-
-                null,
-                //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
-                new Response.Listener<JSONObject>() {
+        //KiiCloudの検索条件を作成。検索条件は未設定。なので全件。KiiQueryはデータをとってくるクラス。Queryは条件という意味。
+        KiiQuery query = new KiiQuery();
+        //ソート条件を設定。日付の降順。sortByDescが降順という意味。
+        query.sortByDesc("_created");
+        //バケットmessagesを検索する。最大200件。
+        Kii.bucket("messages")
+                .query(new KiiQueryCallBack<KiiObject>() {
+                    //検索が完了した時
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        //try catchでエラーを処理します。tryが必要かどうかはtryに記述している関数次第です。
-                        try {
-                            //jsonデータを下記で定義したparse関数を使いデータクラスにセットしています。
-                            List<MessageRecord> messageRecords = parse(jsonObject);
-                            //データをアダプターにセットしています。
-                            mAdapter.setMessageRecords(messageRecords);
+                    public void onQueryCompleted(int token, KiiQueryResult<KiiObject> result, Exception exception) {
+                        if (exception != null) {
+                            //エラー処理を書く
+                            return;
                         }
-                        catch(JSONException e) {
-                            //トーストを表示
-                            Toast.makeText(getApplicationContext(), "Unable to parse data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        //空のMessageRecordデータの配列を作成
+                        ArrayList<MessageRecord> records = new ArrayList<MessageRecord>();
+                        //検索結果をListで得る
+                        List<KiiObject> objLists = result.getResult();
+                        //得られたListをMessageRecordに設定する.objにはkiicloudの管理画面のmesseagesが一行まるごと入っている。
+                            for (KiiObject obj : objLists) {
+                            //_id(KiiCloudのキー)を得る。空の時は""が得られる。未定義でも""空文字を返すようにしないと、nullのとき落ちたりするから良くない。
+                            String id = obj.getString("_id", "");
+                            String title = obj.getString("comment", "");
+                            String url = obj.getString("imageUrl", "");
+                            String price = obj.getString("price", "");
+
+                            //MessageRecordを新しく作ります。
+                            MessageRecord record = new MessageRecord(id, url, title, price);
+                            //MessageRecordの配列に追加します。
+                            records.add(record);
                         }
+                        //データをアダプターにセットしています。これで表示されます。
+                        mAdapter.setMessageRecords(records);
                     }
-                },
-                //通信結果、エラーの時の処理クラスを作成。
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //トーストを表示
-                        Toast.makeText(getApplicationContext(), "Unable to fetch data: " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        //作成した通信クラスをキュー、待ち行列にいれて適当なタイミングで通信します。
-        //VolleyApplicationはnewしていません。これはAndroidManifestで記載しているので起動時に自動的にnewされています。
-        VolleyApplication.getInstance().getRequestQueue().add(request);
+                }, query);
+
     }
-    //サーバにあるjsonデータをMessageRecordに変換します。
-    private List<MessageRecord> parse(JSONObject json) throws JSONException {
-        //空のMessageRecordデータの配列を作成
-        ArrayList<MessageRecord> records = new ArrayList<MessageRecord>();
-        //jsonデータのmessagesにあるJson配列を取得します。
-//        JSONArray jsonMessages = json.getJSONArray("forecasts");
-//        JSONArray jsonMessages = json.getJSONArray("messages");
-        JSONArray jsonMessages = json.getJSONArray("results");
-
-
-
-        //配列の数だけ繰り返します。
-        for(int i = 0; i < jsonMessages.length(); i++) {
-            //１つだけ取り出します。
-            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
-//            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
-            //jsonの値を取得します。
-            String title = jsonMessage.getString("trackViewUrl");
-            String url = jsonMessage.getString("artworkUrl100");
-            String price = jsonMessage.getString("collectionPrice");
-
-//            String title = jsonMessage.getString("comment2");
-//            String url = jsonMessage.getString("imageUrl");
-//            String url = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
-//            String title = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("userReview");
-//            String price = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
-// String title = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelInformationUrl");
-//            String price = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
-            //jsonMessageを新しく作ります。
-            MessageRecord record = new MessageRecord(url, title, price);
-            //MessageRecordの配列に追加します。
-            records.add(record);
-        }
-
-        return records;
+    //Postから戻ってくるときに画面を更新したいのでfetchを実行しています。
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //一覧のデータを作成して表示します。
+        fetch();
     }
+    //ListView2で追加ここまで
+
+//    //自分で作った関数です。一覧のデータを作成して表示します。
+//    private void fetch() {
+//        //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
+//        JsonObjectRequest request = new JsonObjectRequest(
+////                "https://drive.google.com/uc?export=download&id=0B9CRQMFdiJG4a2M0SXRhZTZSckE" ,//jsonデータが有るサーバーのURLを指定します。
+////                "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010" ,
+////                "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20131024?format=json&formatVersion=1&sort=standard&latitude=35.691638&longitude=139.704616&searchRadius=1&datumType=1&applicationId=1033442970304401120",
+//                "https://itunes.apple.com/search?term=Grimes",
+////                "https://itunes.apple.com/search?term=musicVideo",
+//
+//                null,
+//                //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject jsonObject) {
+//                        //try catchでエラーを処理します。tryが必要かどうかはtryに記述している関数次第です。
+//                        try {
+//                            //jsonデータを下記で定義したparse関数を使いデータクラスにセットしています。
+//                            List<MessageRecord> messageRecords = parse(jsonObject);
+//                            //データをアダプターにセットしています。
+//                            mAdapter.setMessageRecords(messageRecords);
+//                        }
+//                        catch(JSONException e) {
+//                            //トーストを表示
+//                            Toast.makeText(getApplicationContext(), "Unable to parse data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                },
+//                //通信結果、エラーの時の処理クラスを作成。
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        //トーストを表示
+//                        Toast.makeText(getApplicationContext(), "Unable to fetch data: " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//        //作成した通信クラスをキュー、待ち行列にいれて適当なタイミングで通信します。
+//        //VolleyApplicationはnewしていません。これはAndroidManifestで記載しているので起動時に自動的にnewされています。
+//        VolleyApplication.getInstance().getRequestQueue().add(request);
+//    }
+//    //サーバにあるjsonデータをMessageRecordに変換します。
+//    private List<MessageRecord> parse(JSONObject json) throws JSONException {
+//        //空のMessageRecordデータの配列を作成
+//        ArrayList<MessageRecord> records = new ArrayList<MessageRecord>();
+//        //jsonデータのmessagesにあるJson配列を取得します。
+////        JSONArray jsonMessages = json.getJSONArray("forecasts");
+////        JSONArray jsonMessages = json.getJSONArray("messages");
+//        JSONArray jsonMessages = json.getJSONArray("results");
+//
+//
+//
+//        //配列の数だけ繰り返します。
+//        for(int i = 0; i < jsonMessages.length(); i++) {
+//            //１つだけ取り出します。
+//            JSONObject jsonMessage = jsonMessages.getJSONObject(i);
+////            JSONArray jsonMessage = jsonMessages.getJSONArray(i);
+//            //jsonの値を取得します。
+//            String title = jsonMessage.getString("trackViewUrl");
+//            String url = jsonMessage.getString("artworkUrl100");
+//            String price = jsonMessage.getString("collectionPrice");
+//
+////            String title = jsonMessage.getString("comment2");
+////            String url = jsonMessage.getString("imageUrl");
+////            String url = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("roomThumbnailUrl");
+////            String title = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("userReview");
+////            String price = jsonMessage.getJSONArray("hotel").getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
+//// String title = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelInformationUrl");
+////            String price = jsonMessage.getJSONObject(0).getJSONObject("hotelBasicInfo").getString("hotelMinCharge");
+//            //jsonMessageを新しく作ります。
+//            MessageRecord record = new MessageRecord(url, title, price);
+//            //MessageRecordの配列に追加します。
+//            records.add(record);
+//        }
+//
+//        return records;
+//    }
 
     //デフォルトで作成されたメニューの関数です。未使用。
     @Override
