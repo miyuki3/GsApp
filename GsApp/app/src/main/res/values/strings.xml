@@ -26,6 +26,8 @@
     <string name="post_button">Post</string>
     <string name="no_data_message">No Data</string>
     <string name="FbButton">Facebookログインはこちら</string>
+    <string name="bad">ダウナー</string>
+    <string name="good">ハッピー</string>
     <!-- Postで追加ここまで-->
 
 </resources>

@@ -8,13 +8,15 @@ public class MessageRecord {
     private String comment;
     private String price;
     private String id;
+    private boolean tB;
 
     //データを１つ作成する関数です。項目が増えたら増やしましょう。MessageRecordはコンストラクターという.
-    public MessageRecord(String id, String imageUrl, String comment, String price) {
+    public MessageRecord(String id, String imageUrl, String comment, String price, boolean tB) {
         this.imageUrl = imageUrl;
         this.comment = comment;
         this.price = price;
         this.id = id;
+        this.tB = this.tB;
     }
     //それぞれの項目を返す関数です。項目が増えたら増やしましょう。getするためのfuncion。
     public String getComment() {
@@ -27,4 +29,5 @@ public class MessageRecord {
     public String getId() {
         return id;
     }
+    public boolean getTB(){ return tB; }
 }

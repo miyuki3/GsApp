@@ -23,8 +23,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 import com.kii.cloud.storage.Kii;
 import com.kii.cloud.storage.KiiBucket;
@@ -51,6 +53,9 @@ public class PostActivity extends ActionBarActivity {
     private String comment;
     //カメラで撮影した画像のuri
     private Uri mImageUri;
+    //トグルボタンのON OFF 保存しておく
+    private boolean tB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,21 @@ public class PostActivity extends ActionBarActivity {
                 onPostButtonClicked(v);
             }
         });
+
+        //トグルボタンにクリックイベントを追加しています。
+        CompoundButton tButton = (CompoundButton) findViewById(R.id.toggleButton);
+        tButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                tB = isChecked;
+
+                }
+
+        });
+
+
+
+
 
         //Android6ではPermissonをプログラムで許可してあげないと実行時にSecurityExceptionエラーになる。
         //参考：http://qiita.com/kazhida/items/12ab5ce655e7c5a463ff
@@ -300,6 +320,8 @@ public class PostActivity extends ActionBarActivity {
         KiiObject object = bucket.object();
         //Json形式でKeyのcommentをセット.{"comment":"こめんとです","imageUrl":"http://xxx.com/xxxx"}
         object.set("comment", comment);
+        //トグルボタンのboolean値をセット
+        object.set("onOff", tB);
         //画像があるときだけセット
         if(url != null) {
             object.set("imageUrl", url);

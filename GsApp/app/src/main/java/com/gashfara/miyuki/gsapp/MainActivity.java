@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,9 +30,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    //SwipeRefreshLayoutの設定
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     //アダプタークラスです。
     private MessageRecordsAdapter mAdapter;
@@ -69,6 +75,22 @@ public class MainActivity extends ActionBarActivity {
         //一覧のデータを作成して表示します。
         fetch();
 
+        //引っ張って画面更新する
+        // SwipeRefreshLayoutの設定
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+
+        // Listenerをセット
+//        mSwipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener);
+
+//        @Override
+//        public void onRefresh(){
+//            // 色指定
+//            mSwipeRefreshLayout.setColorSchemeResources(R.color.colorRed, R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+//        }
+
+
+
+
     }
 
     //ListView2で追加ここから
@@ -100,9 +122,10 @@ public class MainActivity extends ActionBarActivity {
                             String title = obj.getString("comment", "");
                             String url = obj.getString("imageUrl", "");
                             String price = obj.getString("price", "");
+                                boolean tB = obj.getBoolean("tB", false);
 
                             //MessageRecordを新しく作ります。
-                            MessageRecord record = new MessageRecord(id, url, title, price);
+                            MessageRecord record = new MessageRecord(id, url, title, price, tB);
                             //MessageRecordの配列に追加します。
                             records.add(record);
                         }
